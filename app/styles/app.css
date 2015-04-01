@@ -1,3 +1,11 @@
+/*html, body {
+  height:100%;
+}*/
+
+body {
+  padding-top: 50px;
+}
+
 /* http://cssdeck.com/labs/pure-css-tree-menu-framework */
 
 /**
@@ -37,6 +45,7 @@
   color:#369;
   font-weight:bold;
   position:relative;
+  white-space: nowrap;
 }
 
 .tree ul li:before {
@@ -52,7 +61,7 @@
 }
 
 .tree ul li:last-child:before {
-  background:white; /* same with body background */
+  background:#ccc; /* same with body background */
   height:auto;
   top:1em; /* (line-height/2) */
   bottom:0;
