@@ -12,7 +12,7 @@ Account.reopenClass({
   FIXTURES: [
    {
      id: 1,
-     name: 'Accounts',
+     name: 'Root',
      createdOn: null,
      description: null,
      parentAccount: null,
