@@ -7,6 +7,8 @@ var Router = Ember.Router.extend({
 
 export default Router.map(function() {
   this.route('accounts', function() {
-    this.route('account', {path: "/:account_id"});
+    this.route('account', {path: "/:account_id"}, function() {
+      this.route('transactions');
+    });
   });
 });

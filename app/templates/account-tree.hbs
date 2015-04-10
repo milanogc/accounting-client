@@ -1,9 +1,9 @@
-{{#link-to 'accounts.account' id}}{{name}}{{/link-to}}
+{{#link-to 'accounts.account.transactions' model.id}}{{model.name}}{{/link-to}}
 
 <ul>
-  {{#each childAccounts}}
+  {{#each account in model.childAccounts}}
     <li>
-      {{partial 'account-tree'}}
+      {{render 'account-tree' account}}
     </li>
   {{/each}}
 </ul>
