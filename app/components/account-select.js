@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   tagName: "input",
   classNames: ["form-control"],
   didInsertElement: function() {
-    var data = [
+    /*var data = [
       {id: "2", name: "2 - Gastos", children: [
         {id: "2.1", name: "2.1 - DESPESA OPERACIONAL FIXA", children: [
           {id: "2.1.1", name: "2.1.1 - PESSOAL", children: [
@@ -18,7 +18,7 @@ export default Ember.Component.extend({
           ]}
         ]}
       ]}
-    ];
+    ];*/
 
     var self = this;
 
@@ -29,10 +29,10 @@ export default Ember.Component.extend({
         return {results: [rootAccount.toJSON()], text: "name"};
 
       },
-      formatSelection: function(item) { 
+      formatSelection: function(item) {
         return item.name;
       },
-      formatResult: function(item) { 
+      formatResult: function(item) {
         return item.name;
       }
     });

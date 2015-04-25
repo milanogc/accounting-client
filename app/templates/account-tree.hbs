@@ -1,7 +1,7 @@
 {{#link-to 'accounts.account.transactions' model.id}}{{model.name}}{{/link-to}}
 
 <ul>
-  {{#each account in model.childAccounts}}
+  {{#each account in model.children}}
     <li>
       {{render 'account-tree' account}}
     </li>

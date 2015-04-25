@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 var Transaction = DS.Model.extend({
   occurredOn: DS.attr('date'),
-  /*entires: DS.hasMany('entry'),*/
+  /*entries: DS.hasMany('entry'),*/
   description: DS.attr('string')
 });
 
