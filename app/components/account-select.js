@@ -1,35 +1,24 @@
 import Ember from 'ember';
 
-function createTree(account) {
+function createTreeForSelect2(account) {
   var children = [];
   account.get('children').forEach(function(child) {
     children.push({
       id: child.get('id'),
-      name: child.get('name'),
-      children: createTree(child)
+      text: child.get('name'),
+      children: createTreeForSelect2(child)
     });
   });
-  return children; /* [{id, name, children}*] */
+  return children; /* [{id, text, children}*] */
 }
 
 export default Ember.Component.extend({
   tagName: "input",
   classNames: ["form-control"],
   didInsertElement: function() {
-    var self = this;
-
     this._select = this.$().select2({
       dropdownAutoWidth: true,
-      data: function() {
-        var rootAccount = self.get('account');
-        return {results: createTree(rootAccount), text: "name"};
-      },
-      formatSelection: function(item) {
-        return item.name;
-      },
-      formatResult: function(item) {
-        return item.name;
-      }
+      data: createTreeForSelect2(this.get('rootAccount'))
     });
   }
 });
