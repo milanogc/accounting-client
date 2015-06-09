@@ -66,3 +66,6 @@ body {
   top:1em; /* (line-height/2) */
   bottom:0;
 }
+.select2-container.form-control {
+  display: inline-block;
+}

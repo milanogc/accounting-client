@@ -32,33 +32,26 @@
       <div class="modal-body">
         <form>
           <div class="row">
-            <div class="col-xs-3">
+            <div class="col-xs-5">
               <label for="transaction-date" class="control-label">Date</label>
-              <input type="datetime" class="form-control" id="transaction-date">
+              {{bs-datetimepicker date=date}}
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-3">
-              <label for="transaction-account" class="control-label">Account</label>
+            <div class="col-xs-5">
+              <label for="transaction-account" class="control-label">Transference</label>
+              &nbsp;
             </div>
             <div class="col-xs-3">
               <label for="transaction-amount" class="control-label">Amount</label>
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-3">
+            <div class="col-xs-5">
               {{account-select rootAccount=rootAccount}}
             </div>
             <div class="col-xs-3">
-              <input type="text" class="form-control" id="transaction-amount">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-3">
-              {{account-select rootAccount=rootAccount}}
-            </div>
-            <div class="col-xs-3">
-              <input type="text" class="form-control" id="transaction-amount">
+              <input type="text" class="form-control">
             </div>
           </div>
           <div class="form-group">
