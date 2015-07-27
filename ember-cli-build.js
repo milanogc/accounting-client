@@ -21,11 +21,8 @@ module.exports = function(defaults) {
 
   // http://discuss.emberjs.com/t/why-is-it-so-difficult-to-add-bootstrap/6682#post_9 - Milano
   app.import('bower_components/bootstrap/dist/css/bootstrap.min.css');
-  //app.import(app.bowerDirectory + '/bootstrap/dist/css/bootstrap.css');
   app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');
-  //app.import(app.bowerDirectory + '/bootstrap/dist/js/bootstrap.js');
   app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', { destDir: 'fonts' });
-  //app.import(app.bowerDirectory + '/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', { destDir: 'fonts' });
 
   app.import('bower_components/select2/select2.css');
   app.import('bower_components/select2-bootstrap-css/select2-bootstrap.min.css');

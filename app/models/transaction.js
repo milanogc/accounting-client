@@ -6,9 +6,4 @@ var Transaction = DS.Model.extend({
   description: DS.attr('string')
 });
 
-Transaction.reopenClass({
-  FIXTURES: [
-  ]
-});
-
 export default Transaction;
