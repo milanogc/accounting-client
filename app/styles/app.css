@@ -2,10 +2,6 @@
   height:100%;
 }*/
 
-body {
-  padding-top: 50px;
-}
-
 /* http://cssdeck.com/labs/pure-css-tree-menu-framework */
 
 /**
@@ -66,6 +62,15 @@ body {
   top:1em; /* (line-height/2) */
   bottom:0;
 }
+
 .select2-container.form-control {
   display: inline-block;
+}
+
+#account-tree {
+  background-color: #ccc;
+  position: fixed;
+  height: 100%;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }

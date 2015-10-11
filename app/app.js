@@ -52,7 +52,7 @@ import Pretender from 'pretender';
       createdOn: null,
       description: null,
       parent: 3,
-      children: [7]
+      children: [7, 10]
     },
     {
       id: 7,
@@ -60,7 +60,7 @@ import Pretender from 'pretender';
       createdOn: null,
       description: null,
       parent: 6,
-      children: [8]
+      children: [8, 9]
     },
     {
       id: 8,
@@ -68,6 +68,30 @@ import Pretender from 'pretender';
       createdOn: null,
       description: null,
       parent: 7,
+      children: []
+    },
+    {
+      id: 9,
+      name: 'Nubank',
+      createdOn: null,
+      description: null,
+      parent: 7,
+      children: []
+    },
+    {
+      id: 10,
+      name: 'Visa',
+      createdOn: null,
+      description: null,
+      parent: 6,
+      children: [11]
+    },
+    {
+      id: 11,
+      name: 'Santander Free',
+      createdOn: null,
+      description: null,
+      parent: 10,
       children: []
     },
   ];
