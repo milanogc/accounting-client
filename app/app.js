@@ -20,7 +20,7 @@ import Pretender from 'pretender';
       createdOn: null,
       description: null,
       parent: 1,
-      children: [4]
+      children: [4, 12]
     },
     {
       id: 3,
@@ -36,6 +36,22 @@ import Pretender from 'pretender';
       createdOn: null,
       description: null,
       parent: 2,
+      children: []
+    },
+    {
+      id: 12,
+      name: 'Checking account',
+      createdOn: null,
+      description: null,
+      parent: 2,
+      children: [13]
+    },
+    {
+      id: 13,
+      name: 'Bradesco',
+      createdOn: null,
+      description: null,
+      parent: 12,
       children: []
     },
     {
@@ -96,6 +112,8 @@ import Pretender from 'pretender';
     },
   ];
 
+  var transactions = [];
+
   this.get('/accounts', function(/*request*/) {
     return [200, {"Content-Type": "application/json"}, JSON.stringify({"accounts": accounts})];
   });
@@ -105,6 +123,11 @@ import Pretender from 'pretender';
       return account.id === parseInt(request.params.id);
     });
     return [200, {"Content-Type": "application/json"}, JSON.stringify({"account": result})];
+  });
+
+  this.post('/transactions', function(request) {
+    console.log(request.params);
+    return [201, {"Content-Type": "application/json"}, JSON.stringify({})];
   });
 });
 

@@ -44,6 +44,17 @@
   white-space: nowrap;
 }
 
+.tree li a {
+  outline: none;
+}
+
+.tree li a.active {
+  color: #fff;
+  background-color: #369;
+  text-decoration: none;
+  outline: none;
+}
+
 .tree ul li:before {
   content:"";
   display:block;

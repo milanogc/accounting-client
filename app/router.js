@@ -11,4 +11,5 @@ export default Router.map(function() {
       this.route('transactions');
     });
   });
+  this.route('transaction');
 });

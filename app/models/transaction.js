@@ -2,8 +2,10 @@ import DS from 'ember-data';
 
 var Transaction = DS.Model.extend({
   occurredOn: DS.attr('date'),
-  /*entries: DS.hasMany('entry'),*/
-  description: DS.attr('string')
+  description: DS.attr('string'),
+  // https://github.com/lytics/ember-data.model-fragments
+  // entries: DS.hasManyFragments('entry', { defaultValue: [] })
+  // entries: DS.attr()
 });
 
 export default Transaction;
