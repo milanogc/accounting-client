@@ -1,28 +1,26 @@
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
 
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">MiniAccounting</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar">
-            {{#link-to "accounts" tagName="li"}}{{#link-to "accounts"}}Accounts{{/link-to}}{{/link-to}}
-            {{#link-to "transaction" tagName="li"}}{{#link-to "transaction"}}Transaction{{/link-to}}{{/link-to}}
-            <button class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#newTransactionModal">
-              New transaction
-            </button>
-          </ul>
-        </div><!--/.nav-collapse -->
-
-    </nav>
-
-    <div class="container-fluid">
-        <div style="padding-top: 50px;">
-          {{outlet}}
-        </div>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">MiniAccounting</a>
     </div>
+
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar">
+        {{#link-to "accounts" tagName="li"}}{{#link-to "accounts"}}Accounts{{/link-to}}{{/link-to}}
+        {{#link-to "transaction" tagName="li"}}{{#link-to "transaction"}}Transaction{{/link-to}}{{/link-to}}
+      </ul>
+    </div><!--/.nav-collapse -->
+
+</nav>
+
+<div class="container-fluid">
+    <div style="padding-top: 50px;">
+      {{outlet}}
+    </div>
+</div>

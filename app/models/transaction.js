@@ -5,7 +5,7 @@ var Transaction = DS.Model.extend({
   description: DS.attr('string'),
   // https://github.com/lytics/ember-data.model-fragments
   // entries: DS.hasManyFragments('entry', { defaultValue: [] })
-  // entries: DS.attr()
+  entries: DS.attr()
 });
 
 export default Transaction;

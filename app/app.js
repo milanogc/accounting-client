@@ -113,6 +113,12 @@ import Pretender from 'pretender';
   ];
 
   var transactions = [];
+  var entries = [];
+
+  function newTransaction(transaction) {
+    transactions.push(transaction);
+    console.log(transactions);
+  }
 
   this.get('/accounts', function(/*request*/) {
     return [200, {"Content-Type": "application/json"}, JSON.stringify({"accounts": accounts})];
@@ -126,17 +132,20 @@ import Pretender from 'pretender';
   });
 
   this.post('/transactions', function(request) {
-    console.log(request.params);
+    var data = JSON.parse(request.requestBody);
+    newTransaction(data.transaction);
     return [201, {"Content-Type": "application/json"}, JSON.stringify({})];
   });
 });
 
+let App;
+
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
-var App = Ember.Application.extend({
+App = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
-  Resolver: Resolver
+  Resolver
 });
 
 loadInitializers(App, config.modulePrefix);

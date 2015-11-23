@@ -5,10 +5,22 @@ export default Ember.Component.extend({
   credit: '',
 
   creditDisabled: Ember.computed('debit', function() {
-    return this.get('debit').length;
+    var debit = this.get('debit');
+
+    if (debit.length) {
+      this.set('entry.amount', -debit);
+    }
+
+    return debit.length;
   }),
 
   debitDisabled: Ember.computed('credit', function() {
-    return this.get('credit').length;
+    var credit = this.get('credit');
+
+    if (credit.length) {
+      this.set('entry.amount', credit);
+    }
+
+    return credit.length;
   })
 });

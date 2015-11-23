@@ -1,3 +1,7 @@
+<button class="btn btn-primary" data-toggle="modal" {{action "showNewTransactionModal"}}>
+  New transaction
+</button>
+
 <h3>{{model.name}} entries</h3>
 
 <table class="table table-striped">
@@ -19,4 +23,4 @@
   </tbody>
 </table>
 
-{{transaction-modal-component rootAccount=rootAccount}}
+{{transaction-modal-component showModal=showModal rootAccount=(readonly rootAccount)}}

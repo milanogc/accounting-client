@@ -26,7 +26,7 @@
   </div>
   {{#each entries as |entry|}}
     <div class="row form-group">
-        {{entry-component rootAccount=rootAccount}}
+        {{entry-component entry=entry rootAccount=rootAccount}}
 
         <!--
         {{#if entry.last}}
