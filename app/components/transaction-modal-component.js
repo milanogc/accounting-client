@@ -23,11 +23,11 @@ export default Ember.Component.extend({
     entries.pushObject(Ember.Object.create({accountId: '', last: true}));
   },
 
-  showModal: Ember.on('didInsertElement', function() {
-    this.$('.modal').modal({show: false}).on('hidden.bs.modal', this /* will be seen as event.data */, function(event) {
+  /*showModal: Ember.on('didInsertElement', function() {
+    this.$('.modal').modal({show: false}).on('hidden.bs.modal', this *//* will be seen as event.data *//*, function(event) {
       event.data.set('showModal', false);
     });
-  }),
+  }),*/
 
   showModalChanged: Ember.observer('showModal', function() {
     if (this.get('showModal')) {
