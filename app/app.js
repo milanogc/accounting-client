@@ -112,12 +112,16 @@ import Pretender from 'pretender';
     },
   ];
 
-  var transactions = [];
   var entries = [];
+  var transactions = [];
 
   function newTransaction(transaction) {
+    for (var entry of transaction.entries) {
+      entries.push({entry: entry, transaction: transaction});
+    }
+
+    transaction.id = transactions.length + 1;
     transactions.push(transaction);
-    console.log(transactions);
   }
 
   this.get('/accounts', function(/*request*/) {
@@ -125,16 +129,32 @@ import Pretender from 'pretender';
   });
 
   this.get('/accounts/:id', function(request) {
-    var result = accounts.find(function (account) {
+    var result = accounts.find(function(account) {
       return account.id === parseInt(request.params.id);
     });
     return [200, {"Content-Type": "application/json"}, JSON.stringify({"account": result})];
   });
 
+  this.get('/accounts/:id/entries', function(request) {
+    var data = JSON.parse(request.requestBody);
+    var filteredEntries = [];
+
+    for (var entry of entries) {
+      if (entry.entry.accountId === request.params.id) {
+        filteredEntries.push(Object.assign({}, entry.entry, entry.transaction));
+      }
+    }
+
+    return [200, {"Content-Type": "application/json"}, JSON.stringify({
+      "entries": filteredEntries
+    })];
+  });
+
   this.post('/transactions', function(request) {
     var data = JSON.parse(request.requestBody);
-    newTransaction(data.transaction);
-    return [201, {"Content-Type": "application/json"}, JSON.stringify({})];
+    var transaction = data.transaction;
+    newTransaction(transaction);
+    return [201, {"Content-Type": "application/json"}, JSON.stringify({"transaction": transaction})];
   });
 });
 

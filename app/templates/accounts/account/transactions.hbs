@@ -1,4 +1,4 @@
-<button class="btn btn-primary" data-toggle="modal" {{action "showNewTransactionModal"}}>
+<button class="btn btn-primary" {{action "showTransactionModal"}}>
   New transaction
 </button>
 
@@ -14,13 +14,23 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Date</td>
-      <td>Description</td>
-      <td>Transfer</td>
-      <td>Value</td>
-    </tr>
+    {{#each entries as |entry|}}
+      <tr>
+        <td>
+          {{entry.occurredOn}}
+        </td>
+        <td>
+          &nbsp;
+        </td>
+        <td>
+          {{entry.accountId}}
+        </td>
+        <td>
+          {{entry.amount}}
+        </td>
+      </tr>
+    {{/each}}
   </tbody>
 </table>
 
-{{transaction-modal-component showModal=showModal rootAccount=(readonly rootAccount)}}
+{{transaction-modal-component show=showTransactionModal rootAccount=(readonly rootAccount)}}

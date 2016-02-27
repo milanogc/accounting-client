@@ -1,11 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  showModal: false,
+  showTransactionModal: false,
 
   actions: {
-    showNewTransactionModal: function() {
-      this.toggleProperty('showModal');
+    showTransactionModal: function() {
+      this.set('showTransactionModal', true);
     }
   }
 });

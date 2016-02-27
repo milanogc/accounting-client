@@ -1,60 +1,46 @@
 <!-- select2: http://jsfiddle.net/7573va8p/17/ -->
 
-<div class="modal" id="newTransactionModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Cancel"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Transaction</h4>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="row">
-            <div class="col-md-5 form-group">
-              <label for="transaction-date" class="control-label">Date</label>
-              {{bs-datetimepicker date=(readonly occurredOn) updateDate=(action (mut occurredOn))}}
-            </div>
+{{#bs-modal open=show closeAction=(action "cancel") title="Transaction" autoClose=false body=false footer=false}}
+    <div class="modal-body">
+      {{#bs-form action=(action "post") model=this}}
+        <div class="row">
+          <div class="col-md-5 form-group">
+            <label for="transaction-date" class="control-label">Date</label>
+            {{bs-datetimepicker date=(readonly occurredOn) updateDate=(action (mut occurredOn))}}
           </div>
-          <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="transaction-description" class="control-label">Description</label>
-                  <textarea class="form-control" id="transaction-description">{{description}}</textarea>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="transaction-description" class="control-label">Description</label>
+                <textarea class="form-control" id="transaction-description">{{description}}</textarea>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+              <label class="control-label">Account</label>
+            </div>
+            <div class="col-md-3">
+              <label class="control-label">Debit</label>
+            </div>
+            <div class="col-md-3">
+              <label class="control-label">Credit</label>
+            </div>
+        </div>
+        {{#each entries as |entry|}}
+          <div class="row form-group">
+              {{entry-component entry=entry rootAccount=(readonly rootAccount)}}
+              {{#if entry.last}}
+                <div class="col-md-1">
+                  <button {{action "addEntry" on="click"}} type="button" class="btn btn-default" aria-label="Add entry">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                  </button>
                 </div>
-              </div>
+              {{/if}}
           </div>
-          <div class="row">
-              <div class="col-md-4">
-                <label class="control-label">Account</label>
-              </div>
-              <div class="col-md-3">
-                <label class="control-label">Debit</label>
-              </div>
-              <div class="col-md-3">
-                <label class="control-label">Credit</label>
-              </div>
-          </div>
-          {{#each entries as |entry|}}
-            <div class="row form-group">
-                {{entry-component entry=entry rootAccount=(readonly rootAccount)}}
-
-                {{#if entry.last}}
-                  <div class="col-md-1">
-                    <button {{action "addEntry" on="click"}} type="button" class="btn btn-default" aria-label="Add entry">
-                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </button>
-                  </div>
-                {{/if}}
-            </div>
-          {{/each}}
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button {{action "post"}} type="button" class="btn btn-primary">Post transaction</button>
-      </div>
+        {{/each}}
+      {{/bs-form}}
     </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    {{bs-modal-footer closeTitle="Cancel" submitTitle="Post transaction"}}
+{{/bs-modal}}
