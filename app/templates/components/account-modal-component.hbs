@@ -1,0 +1,16 @@
+{{#bs-modal open=show closeAction=(action "cancel") title="New account" autoClose=false body=false footer=false}}
+  {{#bs-modal-body}}
+    {{#bs-form action=(action "submit")}}
+      {{bs-form-element controlType="text" label="Name" value=name}}
+      <div class="form-group">
+        <label for="transaction-description" class="control-label">Parent account</label>
+        {{account-select-component account=parent rootAccount=rootAccount}}
+      </div>
+      <div class="form-group">
+        <label for="transaction-description" class="control-label">Description</label>
+        {{textarea value=description class="form-control" id="transaction-description"}}
+      </div>
+    {{/bs-form}}
+  {{/bs-modal-body}}
+  {{bs-modal-footer closeTitle="Cancel" submitTitle="Create account"}}
+{{/bs-modal}}

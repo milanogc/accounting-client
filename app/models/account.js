@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 
-var Account = DS.Model.extend({
+let Account = DS.Model.extend({
   name: DS.attr('string'),
   createdOn: DS.attr('date'),
   description: DS.attr('string'),

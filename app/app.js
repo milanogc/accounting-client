@@ -4,8 +4,8 @@ import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
 import Pretender from 'pretender';
 
-/*var server = */new Pretender(function() {
-  var accounts = [
+/*let server = */new Pretender(function() {
+  let accounts = [
     {
       id: 1,
       name: 'Root',
@@ -112,11 +112,11 @@ import Pretender from 'pretender';
     },
   ];
 
-  var entries = [];
-  var transactions = [];
+  let entries = [];
+  let transactions = [];
 
   function newTransaction(transaction) {
-    for (var entry of transaction.entries) {
+    for (let entry of transaction.entries) {
       entries.push({entry: entry, transaction: transaction});
     }
 
@@ -128,18 +128,24 @@ import Pretender from 'pretender';
     return [200, {"Content-Type": "application/json"}, JSON.stringify({"accounts": accounts})];
   });
 
+  this.post('/accounts', function(request) {
+    var data = JSON.parse(request.requestBody);
+    var account = data.account;
+    return [201, {"Content-Type": "application/json"}, JSON.stringify({"account": account})];
+  });
+
   this.get('/accounts/:id', function(request) {
-    var result = accounts.find(function(account) {
+    let result = accounts.find(function(account) {
       return account.id === parseInt(request.params.id);
     });
     return [200, {"Content-Type": "application/json"}, JSON.stringify({"account": result})];
   });
 
   this.get('/accounts/:id/entries', function(request) {
-    var data = JSON.parse(request.requestBody);
-    var filteredEntries = [];
+    let data = JSON.parse(request.requestBody);
+    let filteredEntries = [];
 
-    for (var entry of entries) {
+    for (let entry of entries) {
       if (entry.entry.accountId === request.params.id) {
         filteredEntries.push(Object.assign({}, entry.entry, entry.transaction));
       }
@@ -151,8 +157,8 @@ import Pretender from 'pretender';
   });
 
   this.post('/transactions', function(request) {
-    var data = JSON.parse(request.requestBody);
-    var transaction = data.transaction;
+    let data = JSON.parse(request.requestBody);
+    let transaction = data.transaction;
     newTransaction(transaction);
     return [201, {"Content-Type": "application/json"}, JSON.stringify({"transaction": transaction})];
   });

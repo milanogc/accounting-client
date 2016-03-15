@@ -4,18 +4,19 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function() {
-    var model = this.modelFor('accounts.account');
-    var entries = Ember.A();
+    let model = this.modelFor('accounts.account');
+    let entries = Ember.A();
+    let host = this.store.adapterFor('application').get('host');
 
-    $.getJSON('/accounts/' + model.id + '/entries').then(data => {
+    /*this.$.getJSON(host + '/accounts/' + model.id + '/entries').then(data => {
       for (var entry of data.entries) {
         entries.addObject(entry);
       }
-    });
+    });*/
 
     return Ember.RSVP.hash({
       model: model,
-      rootAccount: this.store.findRecord('account', 1),
+      rootAccount: this.modelFor('accounts'),
       entries: entries
     });
   },

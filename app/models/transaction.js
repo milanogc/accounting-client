@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 
-var Transaction = DS.Model.extend({
+let Transaction = DS.Model.extend({
   occurredOn: DS.attr('date'),
   description: DS.attr('string'),
   // https://github.com/lytics/ember-data.model-fragments

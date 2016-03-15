@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
   showTransactionModal: false,
 
   actions: {
-    showTransactionModal: function() {
+    showTransactionModal() {
       this.set('showTransactionModal', true);
     }
   }

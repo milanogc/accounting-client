@@ -1,15 +1,17 @@
 import Ember from 'ember';
 
 function createTreeForSelect2(account) {
-  var children = [];
+  var node = {
+    id: account.get('id'),
+    text: account.get('name'),
+    children: []
+  };
+
   account.get('children').forEach(function(child) {
-    children.push({
-      id: child.get('id'),
-      text: child.get('name'),
-      children: createTreeForSelect2(child)
-    });
+    node.children.push(createTreeForSelect2(child));
   });
-  return children; /* [{id, text, children},*] */
+
+  return node; /* {id, text, children} */
 }
 
 export default Ember.Component.extend({
@@ -19,13 +21,14 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     this._select = this.$().select2({
       dropdownAutoWidth: true,
-      data: createTreeForSelect2(this.get('rootAccount'))
+      data: [createTreeForSelect2(this.get('rootAccount'))]
     });
 
-    this._select.val(this.get('accountId'));
+    this._select.val(this.get('account.id'));
 
     this._select.on("change", Ember.run.bind(this, function(event) {
-      this.set('accountId', event.val);
+      // event.val
+      this.set('account', event.added /* TODO is this correct? */);
     }));
   }
 });

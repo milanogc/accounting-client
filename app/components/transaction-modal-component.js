@@ -13,8 +13,8 @@ export default Ember.Component.extend({
   },
 
   _addEntry() {
-    var entries = this.get('entries');
-    var previousLastEntry = entries.get('lastObject');
+    let entries = this.get('entries');
+    let previousLastEntry = entries.get('lastObject');
 
     if (previousLastEntry) {
       previousLastEntry.set('last', false);
@@ -33,8 +33,8 @@ export default Ember.Component.extend({
     },
 
     post() {
-      var store = this.get('store');
-      var transaction = store.createRecord('transaction', {
+      let store = this.get('store');
+      let transaction = store.createRecord('transaction', {
         occurredOn: this.get('occurredOn'),
         description: this.get('description'),
         entries: this.get('entries')

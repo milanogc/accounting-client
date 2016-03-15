@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   credit: '',
 
   creditDisabled: Ember.computed('debit', function() {
-    var debit = this.get('debit');
+    let debit = this.get('debit');
 
     if (debit.length) {
       this.set('entry.amount', -debit);
@@ -15,7 +15,7 @@ export default Ember.Component.extend({
   }),
 
   debitDisabled: Ember.computed('credit', function() {
-    var credit = this.get('credit');
+    let credit = this.get('credit');
 
     if (credit.length) {
       this.set('entry.amount', credit);
