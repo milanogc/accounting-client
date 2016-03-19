@@ -23,7 +23,7 @@
           &nbsp;
         </td>
         <td>
-          {{entry.accountId}}
+          {{entry.account}}
         </td>
         <td>
           {{entry.amount}}
@@ -33,4 +33,4 @@
   </tbody>
 </table>
 
-{{transaction-modal-component show=showTransactionModal rootAccount=(readonly rootAccount)}}
+{{transaction-modal-component show=showTransactionModal transaction=transaction rootAccount=(readonly rootAccount) post=(action "post") cancel=(action "cancel")}}

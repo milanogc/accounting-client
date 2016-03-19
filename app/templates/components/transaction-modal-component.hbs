@@ -5,14 +5,14 @@
       <div class="row">
         <div class="col-md-5 form-group">
           <label for="transaction-date" class="control-label">Date</label>
-          {{bs-datetimepicker date=(readonly occurredOn) updateDate=(action (mut occurredOn))}}
+          {{bs-datetimepicker date=(readonly transaction.occurredOn) updateDate=(action (mut transaction.occurredOn))}}
         </div>
       </div>
       <div class="row">
           <div class="col-md-12">
             <div class="form-group">
               <label for="transaction-description" class="control-label">Description</label>
-              <textarea class="form-control" id="transaction-description">{{description}}</textarea>
+              <textarea class="form-control" id="transaction-description">{{transaction.description}}</textarea>
             </div>
           </div>
       </div>
@@ -27,7 +27,7 @@
             <label class="control-label">Credit</label>
           </div>
       </div>
-      {{#each entries as |entry|}}
+      {{#each transaction.entries as |entry|}}
         <div class="row form-group">
             {{entry-component entry=entry rootAccount=(readonly rootAccount)}}
             {{#if entry.last}}

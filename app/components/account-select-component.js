@@ -4,7 +4,8 @@ function createTreeForSelect2(account) {
   var node = {
     id: account.get('id'),
     text: account.get('name'),
-    children: []
+    children: [],
+    record: account // link to the ember-data's managed object
   };
 
   account.get('children').forEach(function(child) {
@@ -27,8 +28,7 @@ export default Ember.Component.extend({
     this._select.val(this.get('account.id'));
 
     this._select.on("change", Ember.run.bind(this, function(event) {
-      // event.val
-      this.set('account', event.added /* TODO is this correct? */);
+      this.set('account', event.added.record);
     }));
   }
 });

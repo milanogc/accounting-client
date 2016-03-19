@@ -89,88 +89,135 @@ let root = {
   ]
 };
 
-function createAccountsFromTree(root) {
-  let accounts = [];
+function Accounts(rootOfInitialAccounts) {
+  function createAccountsFromTree(root) {
+    let accounts = [];
 
-  function createAccount(root) {
-    let account = {
-      id: accounts.length + 1,
-      name: root.name,
-      children: []
-    };
+    function createAccount(root, parent) {
+      let account = {
+        id: String(accounts.length + 1),
+        name: root.name,
+        parent: parent,
+        children: []
+      };
 
-    accounts.push(account);
+      accounts.push(account);
 
-    for (let child of root.children) {
-      account.children.push(createAccount(child));
+      for (let child of root.children) {
+        account.children.push(createAccount(child, account.id));
+      }
+
+      return account.id;
     }
 
-    return account.id;
+    createAccount(root, null);
+    return accounts;
   }
 
-  createAccount(root);
-  return accounts;
-}
+  let accounts = createAccountsFromTree(rootOfInitialAccounts);
 
-/*let server = */new Pretender(function() {
-  let accounts = createAccountsFromTree(root);
+  this.allAccounts = function() {
+    return accounts;
+  };
 
-  function createAccount(newAccount) {
+  this.addAccount = function addAccount(newAccount) {
     newAccount.id = accounts.length + 1;
-    newAccount.parent = parseInt(newAccount.parent);
+    newAccount.parent = newAccount.parent;
     accounts.push(newAccount);
     accounts.find(account => account.id === newAccount.parent).children.push(newAccount.id);
-  }
+  };
 
+  this.findAccountOfId = function(id) {
+    return accounts.find(account => account.id === id);
+  };
+}
+
+function Transactions(accounts) {
   let entries = [];
   let transactions = [];
 
-  function newTransaction(transaction) {
+  this.addTransaction = function(transaction) {
+    transaction.id = String(transactions.length + 1);
+    transactions.push(transaction);
+    let i = 0;
+
     for (let entry of transaction.entries) {
+      entry.id = transaction.id + "" + i++;
       entries.push({entry: entry, transaction: transaction});
     }
+  };
 
-    transaction.id = transactions.length + 1;
-    transactions.push(transaction);
-  }
+  this.entriesOfAccount = function(id) {
+    function ancestor(account) {
+      if (!account) {
+        return false;
+      }
 
-  this.get('/accounts', function(/*request*/) {
-    return [200, {"Content-Type": "application/json"}, JSON.stringify({"accounts": accounts})];
-  });
+      if (account.id === id) {
+        console.log(account);
+        return true;
+      }
 
-  this.post('/accounts', function(request) {
-    let data = JSON.parse(request.requestBody);
-    let newAccount = data.account;
-    createAccount(newAccount);
-    return [201, {"Content-Type": "application/json"}, JSON.stringify({"account": newAccount})];
-  });
+      return ancestor(accounts.findAccountOfId(account.parent));
+    }
 
-  this.get('/accounts/:id', function(request) {
-    let result = accounts.find(function(account) {
-      return account.id === parseInt(request.params.id);
-    });
-    return [200, {"Content-Type": "application/json"}, JSON.stringify({"account": result})];
-  });
-
-  this.get('/accounts/:id/entries', function(request) {
     let filteredEntries = [];
 
     for (let entry of entries) {
-      if (entry.entry.accountId === request.params.id) {
+      if (ancestor(accounts.findAccountOfId(entry.entry.account))) {
         filteredEntries.push(Object.assign({}, entry.entry, entry.transaction));
       }
     }
 
+    return filteredEntries;
+  };
+}
+
+/*let server = */new Pretender(function() {
+  let accounts = new Accounts(root);
+  let transactions = new Transactions(accounts);
+
+  this.get('/accounts', function(/*request*/) {
     return [200, {"Content-Type": "application/json"}, JSON.stringify({
-      "entries": filteredEntries
+      "accounts": accounts.allAccounts()
+    })];
+  });
+
+  this.post('/accounts', function(request) {
+    let newAccount = JSON.parse(request.requestBody).account;
+    accounts.addAccount(newAccount);
+    return [201, {"Content-Type": "application/json"}, JSON.stringify({
+      "account": newAccount
+    })];
+  });
+
+  this.get('/accounts/:id', function(request) {
+    let account = accounts.findAccountOfId(request.params.id);
+    return [200, {"Content-Type": "application/json"}, JSON.stringify({
+      "account": account
+    })];
+  });
+
+  this.get('/entries', function(request) {
+    let entries = [];
+    let accountId = request.queryParams['filter[account]'];
+
+    if (accountId !== undefined) {
+      entries = transactions.entriesOfAccount(accountId);
+    }
+
+    return [200, {"Content-Type": "application/json"}, JSON.stringify({
+      "entries": entries
     })];
   });
 
   this.post('/transactions', function(request) {
     let data = JSON.parse(request.requestBody);
     let transaction = data.transaction;
-    newTransaction(transaction);
-    return [201, {"Content-Type": "application/json"}, JSON.stringify({"transaction": transaction})];
+    transactions.addTransaction(transaction);
+    return [201, {"Content-Type": "application/json"}, JSON.stringify({
+      "transaction": transaction
+    })];
   });
 });
 
