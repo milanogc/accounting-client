@@ -2,7 +2,7 @@
   New transaction
 </button>
 
-<h3>{{model.name}} entries</h3>
+<h3>{{account.name}} entries</h3>
 
 <table class="table table-striped">
   <thead>
@@ -23,7 +23,7 @@
           &nbsp;
         </td>
         <td>
-          {{entry.account}}
+          {{entry.account.name}}
         </td>
         <td>
           {{entry.amount}}

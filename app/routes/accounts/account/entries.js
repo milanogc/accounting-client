@@ -8,7 +8,7 @@ export default Ember.Route.extend({
     let entries = this.store.query('entry',  { filter: { account: account.get('id') } });
 
     return Ember.RSVP.hash({
-      model: account,
+      account: account,
       rootAccount: this.modelFor('accounts'),
       entries: entries
     });
