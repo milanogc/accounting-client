@@ -2,7 +2,7 @@
   New transaction
 </button>
 
-<h3>{{account.name}} entries</h3>
+<h3>{{model.account.name}} entries</h3>
 
 <table class="table table-striped">
   <thead>
@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each entries as |entry|}}
+    {{#each model.entries as |entry|}}
       <tr>
         <td>
           {{entry.occurredOn}}
@@ -33,4 +33,4 @@
   </tbody>
 </table>
 
-{{transaction-modal-component show=showTransactionModal transaction=transaction rootAccount=(readonly rootAccount) post=(action "post") cancel=(action "cancel")}}
+{{transaction-modal-component show=showTransactionModal transaction=transaction rootAccount=(readonly model.rootAccount) post=(action "post") cancel=(action "cancel")}}

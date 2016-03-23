@@ -1,9 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  beforeModel() {
+    return this.store.findAll('account');
+  },
+
   model() {
-    return this.store.findAll('account').then(() => {
-      return this.store.peekRecord('account', 'ROOT');
-    });
+    return this.store.peekRecord('account', 'ROOT');
   }
 });

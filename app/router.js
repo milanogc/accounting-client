@@ -7,9 +7,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('accounts', function() {
-    this.route('account', {path: "/:account_id"}, function() {
-      this.route('entries');
-    });
+    this.route('account', {path: "/:account_id"});
   });
 });
 

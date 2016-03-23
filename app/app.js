@@ -4,222 +4,223 @@ import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
 import Pretender from 'pretender';
 
-// let root = {
-//   name: 'Root',
-//   createdOn: null,
-//   description: null,
-//   children: [
-//     {
-//       name: 'Asset',
-//       createdOn: null,
-//       description: null,
-//       children: [
-//         {
-//           name: 'Pocket',
-//           createdOn: null,
-//           description: null,
-//           children: []
-//         },
-//         {
-//           name: 'Checking account',
-//           createdOn: null,
-//           description: null,
-//           children: [{
-//               name: 'Bradesco',
-//               createdOn: null,
-//               description: null,
-//               children: []
-//             }
-//           ]
-//         }
-//       ]
-//     },
-//     {
-//       name: 'Liability',
-//       createdOn: null,
-//       description: null,
-//       children: [
-//         {
-//           name: 'Credit card',
-//           createdOn: null,
-//           description: null,
-//           children: [
-//             {
-//               name: 'Mastercard',
-//               createdOn: null,
-//               description: null,
-//               children: [
-//                 {
-//                   name: 'Santander Free',
-//                   createdOn: null,
-//                   description: null,
-//                   children: []
-//                 },
-//                 {
-//                   name: 'Nubank',
-//                   createdOn: null,
-//                   description: null,
-//                   children: []
-//                 }
-//               ]
-//             },
-//             {
-//               name: 'Visa',
-//               createdOn: null,
-//               description: null,
-//               children: [
-//                 {
-//                   name: 'Santander Free',
-//                   createdOn: null,
-//                   description: null,
-//                   children: []
-//                 }
-//               ]
-//             }
-//           ]
-//         }
-//       ]
-//     },
-//     {
-//       name: 'Equity',
-//       createdOn: null,
-//       description: null,
-//       children: []
-//     }
-//   ]
-// };
-//
-// function Accounts(rootOfInitialAccounts) {
-//   function createAccountsFromTree(root) {
-//     let accounts = [];
-//
-//     function createAccount(root, parent) {
-//       let account = {
-//         id: String(accounts.length + 1),
-//         name: root.name,
-//         parent: parent,
-//         children: []
-//       };
-//
-//       accounts.push(account);
-//
-//       for (let child of root.children) {
-//         account.children.push(createAccount(child, account.id));
-//       }
-//
-//       return account.id;
-//     }
-//
-//     createAccount(root, null);
-//     return accounts;
-//   }
-//
-//   let accounts = createAccountsFromTree(rootOfInitialAccounts);
-//
-//   this.allAccounts = function() {
-//     return accounts;
-//   };
-//
-//   this.addAccount = function addAccount(newAccount) {
-//     newAccount.id = accounts.length + 1;
-//     newAccount.parent = newAccount.parent;
-//     accounts.push(newAccount);
-//     accounts.find(account => account.id === newAccount.parent).children.push(newAccount.id);
-//   };
-//
-//   this.findAccountOfId = function(id) {
-//     return accounts.find(account => account.id === id);
-//   };
-// }
-//
-// function Transactions(accounts) {
-//   let entries = [];
-//   let transactions = [];
-//
-//   this.addTransaction = function(transaction) {
-//     transaction.id = String(transactions.length + 1);
-//     transactions.push(transaction);
-//     let i = 0;
-//
-//     for (let entry of transaction.entries) {
-//       entry.id = transaction.id + "" + i++;
-//       entries.push({entry: entry, transaction: transaction});
-//     }
-//   };
-//
-//   this.entriesOfAccount = function(id) {
-//     function ancestor(account) {
-//       if (!account) {
-//         return false;
-//       }
-//
-//       if (account.id === id) {
-//         console.log(account);
-//         return true;
-//       }
-//
-//       return ancestor(accounts.findAccountOfId(account.parent));
-//     }
-//
-//     let filteredEntries = [];
-//
-//     for (let entry of entries) {
-//       if (ancestor(accounts.findAccountOfId(entry.entry.account))) {
-//         filteredEntries.push(Object.assign({}, entry.entry, entry.transaction));
-//       }
-//     }
-//
-//     return filteredEntries;
-//   };
-// }
-//
-// /*let server = */new Pretender(function() {
-//   let accounts = new Accounts(root);
-//   let transactions = new Transactions(accounts);
-//
-//   this.get('/accounts', function(/*request*/) {
-//     return [200, {"Content-Type": "application/json"}, JSON.stringify({
-//       "accounts": accounts.allAccounts()
-//     })];
-//   });
-//
-//   this.post('/accounts', function(request) {
-//     let newAccount = JSON.parse(request.requestBody).account;
-//     accounts.addAccount(newAccount);
-//     return [201, {"Content-Type": "application/json"}, JSON.stringify({
-//       "account": newAccount
-//     })];
-//   });
-//
-//   this.get('/accounts/:id', function(request) {
-//     let account = accounts.findAccountOfId(request.params.id);
-//     return [200, {"Content-Type": "application/json"}, JSON.stringify({
-//       "account": account
-//     })];
-//   });
-//
-//   this.get('/entries', function(request) {
-//     let entries = [];
-//     let accountId = request.queryParams['filter[account]'];
-//
-//     if (accountId !== undefined) {
-//       entries = transactions.entriesOfAccount(accountId);
-//     }
-//
-//     return [200, {"Content-Type": "application/json"}, JSON.stringify({
-//       "entries": entries
-//     })];
-//   });
-//
-//   this.post('/transactions', function(request) {
-//     let data = JSON.parse(request.requestBody);
-//     let transaction = data.transaction;
-//     transactions.addTransaction(transaction);
-//     return [201, {"Content-Type": "application/json"}, JSON.stringify({
-//       "transaction": transaction
-//     })];
-//   });
-// });
+function configurePretender() {
+  let root = {
+    id: 'ROOT',
+    name: 'Root',
+    createdOn: null,
+    description: null,
+    children: [
+      {
+        name: 'Asset',
+        createdOn: null,
+        description: null,
+        children: [
+          {
+            name: 'Pocket',
+            createdOn: null,
+            description: null,
+            children: []
+          },
+          {
+            name: 'Checking account',
+            createdOn: null,
+            description: null,
+            children: [{
+                name: 'Bradesco',
+                createdOn: null,
+                description: null,
+                children: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Liability',
+        createdOn: null,
+        description: null,
+        children: [
+          {
+            name: 'Credit card',
+            createdOn: null,
+            description: null,
+            children: [
+              {
+                name: 'Mastercard',
+                createdOn: null,
+                description: null,
+                children: [
+                  {
+                    name: 'Santander Free',
+                    createdOn: null,
+                    description: null,
+                    children: []
+                  },
+                  {
+                    name: 'Nubank',
+                    createdOn: null,
+                    description: null,
+                    children: []
+                  }
+                ]
+              },
+              {
+                name: 'Visa',
+                createdOn: null,
+                description: null,
+                children: [
+                  {
+                    name: 'Santander Free',
+                    createdOn: null,
+                    description: null,
+                    children: []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Equity',
+        createdOn: null,
+        description: null,
+        children: []
+      }
+    ]
+  };
+
+  function Accounts(rootOfInitialAccounts) {
+    function createAccountsFromTree(root) {
+      let accounts = [];
+
+      function createAccount(root, parent) {
+        let account = {
+          id: root.id || String(accounts.length + 1),
+          name: root.name,
+          parent: parent,
+          children: []
+        };
+
+        accounts.push(account);
+
+        for (let child of root.children) {
+          account.children.push(createAccount(child, account.id));
+        }
+
+        return account.id;
+      }
+
+      createAccount(root, null);
+      return accounts;
+    }
+
+    let accounts = createAccountsFromTree(rootOfInitialAccounts);
+
+    this.allAccounts = function() {
+      return accounts;
+    };
+
+    this.addAccount = function addAccount(newAccount) {
+      newAccount.id = String(accounts.length + 1);
+      accounts.push(newAccount);
+      accounts.find(account => account.id === newAccount.parent).children.push(newAccount.id);
+    };
+
+    this.findAccountOfId = function(id) {
+      return accounts.find(account => account.id === id);
+    };
+  }
+
+  function Transactions(accounts) {
+    let entries = [];
+    let transactions = [];
+
+    this.addTransaction = function(transaction) {
+      transaction.id = String(transactions.length + 1);
+      transactions.push(transaction);
+      let i = 0;
+
+      for (let entry of transaction.entries) {
+        entry.id = transaction.id + "" + i++;
+        entries.push({entry: entry, transaction: transaction});
+      }
+    };
+
+    this.entriesOfAccount = function(id) {
+      function ancestor(account) {
+        if (!account) {
+          return false;
+        }
+
+        if (account.id === id) {
+          return true;
+        }
+
+        return ancestor(accounts.findAccountOfId(account.parent));
+      }
+
+      let filteredEntries = [];
+
+      for (let entry of entries) {
+        if (ancestor(accounts.findAccountOfId(entry.entry.account))) {
+          filteredEntries.push(Object.assign({}, entry.entry, entry.transaction));
+        }
+      }
+
+      return filteredEntries;
+    };
+  }
+
+  let accounts = new Accounts(root);
+  let transactions = new Transactions(accounts);
+
+  this.get('http://localhost:8080/accounts', function(/*request*/) {
+    return [200, {"Content-Type": "application/json"}, JSON.stringify({
+      "accounts": accounts.allAccounts()
+    })];
+  });
+
+  this.post('http://localhost:8080/accounts', request => {
+    let newAccount = JSON.parse(request.requestBody).account;
+    accounts.addAccount(newAccount);
+    return [201, {"Content-Type": "application/json"}, JSON.stringify({
+      "account": newAccount
+    })];
+  });
+
+  this.get('http://localhost:8080/accounts/:id', request => {
+    let account = accounts.findAccountOfId(request.params.id);
+    return [200, {"Content-Type": "application/json"}, JSON.stringify({
+      "account": account
+    })];
+  });
+
+  this.get('http://localhost:8080/entries', request => {
+    let entries = [];
+    let accountId = request.queryParams['filter[account]'];
+
+    if (accountId !== undefined) {
+      entries = transactions.entriesOfAccount(accountId);
+    }
+
+    return [200, {"Content-Type": "application/json"}, JSON.stringify({
+      "entries": entries
+    })];
+  });
+
+  this.post('http://localhost:8080/transactions', request => {
+    let data = JSON.parse(request.requestBody);
+    let transaction = data.transaction;
+    transactions.addTransaction(transaction);
+    return [201, {"Content-Type": "application/json"}, JSON.stringify({
+      "transaction": transaction
+    })];
+  });
+}
+
+///*let server = */ new Pretender(configurePretender);
 
 let App;
 
