@@ -220,7 +220,7 @@ function configurePretender() {
   });
 }
 
-///*let server = */ new Pretender(configurePretender);
+/*let server = */ new Pretender(configurePretender);
 
 let App;
 
@@ -229,7 +229,16 @@ Ember.MODEL_FACTORY_INJECTIONS = true;
 App = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
-  Resolver
+  Resolver,
+
+  // Basic logging, e.g. "Transitioned into 'post'"
+  LOG_TRANSITIONS: false,
+
+  // Extremely detailed logging, highlighting every internal
+  // step made while transitioning into a route, including
+  // `beforeModel`, `model`, and `afterModel` hooks, and
+  // information about redirects and aborted transitions
+  LOG_TRANSITIONS_INTERNAL: false
 });
 
 loadInitializers(App, config.modulePrefix);

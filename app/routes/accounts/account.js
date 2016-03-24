@@ -4,13 +4,10 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model(params) {
-    let account = this.store.peekRecord('account', params.account_id);
-    let entries = this.store.query('entry',  {filter: {account: account.get('id')}});
-
     return Ember.RSVP.hash({
-      account: account,
+      account: this.store.peekRecord('account', params.account_id),
       rootAccount: this.modelFor('accounts'),
-      entries: entries
+      entries: this.store.query('entry',  {filter: {account: params.account_id}})
     });
   }
 });
