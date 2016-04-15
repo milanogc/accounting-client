@@ -3,7 +3,7 @@
 <ul>
   {{#each model.children as |account|}}
     <li>
-      {{render "account-tree" account}}
+      {{account-tree-component model=account}}
     </li>
   {{/each}}
 </ul>
