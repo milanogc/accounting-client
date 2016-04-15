@@ -165,7 +165,7 @@ function configurePretender() {
 
       for (let entry of entries) {
         if (ancestor(accounts.findAccountOfId(entry.entry.account))) {
-          filteredEntries.push(Object.assign({}, entry.entry, entry.transaction));
+          filteredEntries.push(Ember.assign({}, entry.entry, entry.transaction));
         }
       }
 
