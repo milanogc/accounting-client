@@ -220,7 +220,7 @@ function configurePretender() {
   });
 }
 
-/*let server = */ new Pretender(configurePretender);
+/*let server = */ //new Pretender(configurePretender);
 
 let App;
 
