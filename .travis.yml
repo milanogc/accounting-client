@@ -1,22 +1,23 @@
----
 language: node_js
 node_js:
-  - "4"
-
+- '4'
 sudo: false
-
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 before_install:
-  - npm config set spin false
-  - npm install -g bower
-  - npm install phantomjs-prebuilt
-
+- npm config set spin false
+- npm install -g bower
+- npm install phantomjs-prebuilt
 install:
-  - npm install
-  - bower install
-
+- npm install
+- bower install
 script:
-  - npm test
+- npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: Iw27NjEiSfWJqqVVNKpk110Nhlah1+wDuCBzke0n88LhYGnpCZvZ9O/eHkpEoRDdJ/PnxMDsDpP+qbJ2dY2sdqbImD4454YlAfgpVjoLAlqEm1PAcj67xNRdXWF+OKFQEsgZXeLmF4+i3KYUSAkkcLDANbOl6ZVMPCIDRZua0SQFEykgbnWV2vfxi17E2ltgGIEzG0SClcb54OVepYNgZDTMUgeABcQHIGcccLbInWV3+sme2eqlKmdRD9W3748OPHT8kBTsiQ0cWkfi8PviXt2j4dz/xpwZFcc/QYpqRVvaf8DR8kKeez1KBeu/948cgSMGAMTyWRVCFQNnoCj8b3t6I4/pAD6O2FLu1pHN+dpTOjyFIh04hSPhMqxcAVDgB+5Wk5b65Wxflvvav6RxkVwSZt/OADZund9aPxJliNzmpczTjxFiP9HQ1fxNwjG1CZ8pKgStKjgjI3Ve+wMSn9Amlss50KaQfpYo3i+9jdg48JQvK7euDPyoZc15ARp7wIyDa22YwkHqdgO9sH1gLaxdZpde2rAwRUNCepjDICq4ApZAqTXKn/t+MQSClwo/NPZdtMwjD+9r85EhoAN5JEcXdJJ6wb12kamCQw9wl2k8JmhrIoi6fSs3Mk3BHRcVBpKbPtcHXa+lU7pose6kTnXB0d17V0btVHsHY1Q8U/0=
+  app: miniaccounting
+  on:
+    repo: milanogc/accounting-client
