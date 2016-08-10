@@ -4,10 +4,13 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
   name: '',
   description: '',
-  parent: null,
+  parentAccount: null,
   actions: {
     cancel() {
       this.set('show', false);
+      this.set('name', '');
+      this.set('description', '');
+      this.set('parentAccount', null);
     },
 
     submit() {
@@ -19,10 +22,13 @@ export default Ember.Component.extend({
       let account = store.createRecord('account', {
         name: this.get('name'),
         description: this.get('description'),
-        parent: store.peekRecord('account', this.get('parent.id')) // TODO improve it
+        parent: store.peekRecord('account', this.get('parentAccount.id'))
       });
       account.save();
       this.set('show', false);
+      this.set('name', '');
+      this.set('description', '');
+      this.set('parentAccount', null);
     }
   }
 });

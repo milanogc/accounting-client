@@ -11,22 +11,26 @@
       <th>Description</th>
       <th>Transfer</th>
       <th>Value</th>
+      <th>Sum</th>
     </tr>
   </thead>
   <tbody>
     {{#each model.entries as |entry|}}
       <tr>
         <td>
-          {{entry.occurredOn}}
+          {{format-date entry.occurredOn}}
         </td>
         <td>
-          &nbsp;
+          {{entry.description}}
         </td>
         <td>
           {{entry.account.name}}
         </td>
-        <td>
-          {{entry.amount}}
+        <td style="text-align: right">
+          {{format-number entry.amount}}
+        </td>
+        <td style="text-align: right">
+          {{format-number entry.sum}}
         </td>
       </tr>
     {{/each}}
