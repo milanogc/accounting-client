@@ -1,9 +1,0 @@
-{{#link-to "accounts.account" model.id}}{{model.name}}{{/link-to}}
-
-<ul>
-  {{#each model.children as |account|}}
-    <li>
-      {{account-tree-component model=account}}
-    </li>
-  {{/each}}
-</ul>

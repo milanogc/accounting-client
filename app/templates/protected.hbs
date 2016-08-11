@@ -1,0 +1,29 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+
+    {{#link-to "application" class="navbar-brand"}}MiniAccounting{{/link-to}}
+  </div>
+
+  <div id="navbar" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav navbar">
+      {{#link-to "protected.accounts" tagName="li"}}{{#link-to "protected.accounts"}}Accounts{{/link-to}}{{/link-to}}
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><button type="button" class="btn btn-default navbar-btn" {{action 'invalidateSession'}}><span class="glyphicon glyphicon-log-out"></span> Logout</button> &nbsp;</li>
+    </ul>
+  </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div style="padding-top: 50px;">
+    {{outlet}}
+  </div>
+</div>

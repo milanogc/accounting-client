@@ -6,21 +6,13 @@ const Router = Ember.Router.extend({
   rootURL: config.rootURL
 });
 
-/*
 Router.map(function() {
-  this.route('authenticated', {path: '/'}, function() {
+  this.route('protected', {path: '/'}, function() {
     this.route('accounts', function() {
-      this.route('account', {path: "/:account_id"});
+      this.route('account', {path: '/:account_id'});
     });
   });
   this.route('login');
-});
-*/
-
-Router.map(function() {
-  this.route('accounts', function() {
-    this.route('account', {path: "/:account_id"});
-  });
 });
 
 export default Router;

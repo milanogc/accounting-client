@@ -3,7 +3,7 @@
     {{#bs-form action=(action "submit")}}
       <div class="form-group">
         <label for="parent-account" class="control-label">Parent account</label>
-        {{account-select-component account=parentAccount rootAccount=rootAccount id="parent-account"}}
+        {{account-select account=parentAccount rootAccount=rootAccount id="parent-account"}}
       </div>
       {{bs-form-element controlType="text" label="Name" value=name}}
       <div class="form-group">
