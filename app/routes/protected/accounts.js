@@ -8,5 +8,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   model() {
     return this.store.peekRecord('account', 'ROOT');
-  }
+  },
+
+  actions: {
+    accountSelected(data) {
+      this.transitionTo('protected.accounts.account', data.node.original.id);
+    },
+  },
 });

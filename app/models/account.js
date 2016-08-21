@@ -5,7 +5,8 @@ let Account = DS.Model.extend({
   createdOn: DS.attr('date'),
   description: DS.attr('string'),
   parent: DS.belongsTo('account', {inverse: 'children'}),
-  children: DS.hasMany('account', {inverse: 'parent'})
+  children: DS.hasMany('account', {inverse: 'parent'}),
+  balance: DS.attr('number'), // (read only)
 });
 
 export default Account;

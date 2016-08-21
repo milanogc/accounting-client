@@ -4,14 +4,28 @@
 
 <h3>{{model.account.name}} entries</h3>
 
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <!--div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Panel title</h3>
+      </div>
+      <div class="panel-body">
+        Panel content
+      </div>
+    </div-->
+    {{ember-chart type=chartType data=chartData options=chartOptions height="600px"}}
+  </div>
+</div>
+
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Date</th>
       <th>Description</th>
-      <th>Transfer</th>
-      <th>Value</th>
-      <th>Sum</th>
+      <th>Account</th>
+      <th style="text-align: right">Value</th>
+      <th style="text-align: right">Sum</th>
     </tr>
   </thead>
   <tbody>

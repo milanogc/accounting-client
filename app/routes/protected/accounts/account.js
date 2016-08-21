@@ -7,14 +7,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model({account_id}) {
     return Ember.RSVP.hash({
       account: this.store.peekRecord('account', account_id),
-      rootAccount: this.modelFor('accounts'),
+      rootAccount: this.modelFor('protected.accounts'),
       entries: this.store.query('entry',  {filter: {account: account_id}})
     });
   },
 
   afterModel({account}/*, transition*/) {
     if (!account) { // account doesn't exist
-      this.transitionTo('accounts');
+      this.transitionTo('protected.accounts');
     }
-  }
+  },
 });

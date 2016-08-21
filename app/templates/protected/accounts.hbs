@@ -9,11 +9,7 @@
         </button>
       </div>
       <div class="panel-body">
-        <ul class="tree">
-          <li style="padding: 0;">
-            {{account-tree model=model}}
-          </li>
-        </ul>
+        {{ember-jstree data=dataForAccountTree eventDidChange="accountSelected" themes=themes}}
       </div>
     </div>
   </div>

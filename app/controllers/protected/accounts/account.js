@@ -2,6 +2,35 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   showTransactionModal: false,
+  chartType: 'line',
+
+  chartData: Ember.computed("model.entries", function() {
+    let entries = this.get('model.entries');
+    return {
+      labels: entries.mapBy('occurredOn'),
+      datasets: [{
+        data: entries.mapBy('sum')
+      }]
+    };
+  }),
+
+  chartOptions: {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        type: 'time',
+        time: {
+          //unit: 'month'
+        }
+      }]
+    },
+    legend: {
+      display: false
+    },
+    animation: {
+        duration: 0
+    }
+  },
 
   _createTransaction() {
     let transaction = this.get('store').createRecord('transaction', {

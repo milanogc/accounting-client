@@ -29,7 +29,7 @@
       </div>
       {{#each transaction.entries as |entry|}}
         <div class="row form-group">
-            {{entry entry=entry rootAccount=(readonly rootAccount)}}
+            {{entry-input entry=entry rootAccount=(readonly rootAccount)}}
             {{#if entry.last}}
               <div class="col-md-1">
                 <button {{action "addEntry" on="click"}} type="button" class="btn btn-default" aria-label="Add entry">

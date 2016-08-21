@@ -8,6 +8,13 @@
     "select2": "~3.5.4",
     "select2-bootstrap-css": "~1.4.6",
     "eonasdan-bootstrap-datetimepicker": "~4.17.37",
-    "bootstrap": "~3.3.6"
+    "bootstrap": "~3.3.6",
+    "jstree": "^3.3.2",
+    "jstree-bootstrap-theme": "1.0.1",
+    "chartjs": "2.1.6"
+  },
+  "resolutions": {
+    "bootstrap": "~3.3.6",
+    "jstree": "^3.3.2"
   }
 }
