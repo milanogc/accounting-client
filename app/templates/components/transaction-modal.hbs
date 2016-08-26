@@ -1,5 +1,5 @@
 <!-- select2: http://jsfiddle.net/7573va8p/17/ -->
-{{#bs-modal open=show closeAction=(action "cancel") title="Transaction" autoClose=false body=false footer=false}}
+{{#bs-modal open=show closeAction=(action "cancel") title="Transaction" autoClose=false body=false footer=false fade=false}}
   {{#bs-modal-body}}
     {{#bs-form action=(action "post") model=this}}
       <div class="row">
@@ -12,7 +12,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <label for="transaction-description" class="control-label">Description</label>
-              <textarea class="form-control" id="transaction-description">{{transaction.description}}</textarea>
+              {{textarea value=transaction.description type="text" class="form-control"}}
             </div>
           </div>
       </div>

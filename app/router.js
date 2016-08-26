@@ -9,7 +9,9 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('protected', {path: '/'}, function() {
     this.route('accounts', function() {
-      this.route('account', {path: '/:account_id'});
+      this.route('account', {path: '/:account_id'}, function() {
+        this.route('entries');
+      });
     });
   });
   this.route('login');

@@ -8,8 +8,8 @@ export default Ember.Controller.extend({
     responsive: true
   },
 
-  dataForAccountTree: Ember.computed('model', function() {
-    return this.store.peekAll('account').map(account => {
+  dataForAccountTree: Ember.computed('model.accounts', function() {
+    return this.get('model.accounts').map(account => {
       return {
         id: account.get('id'),
         parent: account.get('parent.id') || '#',

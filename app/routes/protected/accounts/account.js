@@ -5,16 +5,12 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model({account_id}) {
-    return Ember.RSVP.hash({
-      account: this.store.peekRecord('account', account_id),
-      rootAccount: this.modelFor('protected.accounts'),
-      entries: this.store.query('entry',  {filter: {account: account_id}})
-    });
+      return this.store.peekRecord('account', account_id);
   },
 
-  afterModel({account}/*, transition*/) {
-    if (!account) { // account doesn't exist
+  afterModel(account/*, transition*/) {
+    if (!account) {
       this.transitionTo('protected.accounts');
     }
-  },
+  }
 });

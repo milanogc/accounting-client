@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
   chartType: 'line',
 
   chartData: Ember.computed("model.entries", function() {
-    let entries = this.get('model.entries');
+    const entries = this.get('model.entries');
     return {
       labels: entries.mapBy('occurredOn'),
       datasets: [{
@@ -55,7 +55,10 @@ export default Ember.Controller.extend({
     },
 
     post() {
-      this.get('transaction').save(); // persist
+      const controller = this;
+      this.get('transaction').save().then(() => {
+          controller.send('refreshModel');
+      });
       this.set('showTransactionModal', false);
     }
   }

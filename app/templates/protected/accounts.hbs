@@ -1,22 +1,22 @@
 <div class="row">
-  <div id="account-tree" class="col-sm-3 col-md-2" style="padding: 0;">
+  <div id="account-tree" class="col-sm-3 col-md-3" style="padding: 0;">
     <div class="panel panel-default" style="border: none; box-shadow: none;">
       <div class="panel-heading">
         Accounts
 
-        <button class="btn btn-primary btn-sm" {{action "showAccountModal"}}>
+        <button class="btn btn-primary btn-sm" onclick={{action "showAccountModal"}}>
           New account
         </button>
       </div>
       <div class="panel-body">
-        {{ember-jstree data=dataForAccountTree eventDidChange="accountSelected" themes=themes}}
+        {{account-tree accounts=model.accounts}}
       </div>
     </div>
   </div>
 
-  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" style="margin-top: 20px;">
+  <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3" style="margin-top: 20px;">
     {{outlet}}
   </div>
 </div>
 
-{{account-modal show=showAccountModal rootAccount=(readonly model)}}
+{{account-modal show=showAccountModal rootAccount=(readonly model.rootAccount)}}
