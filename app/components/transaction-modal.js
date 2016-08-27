@@ -1,11 +1,16 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  entries: Ember.computed.map('transaction.entries', function(entry) {
+    return Ember.ObjectProxy.create({
+      content: entry,
+      isLast: this.get('transaction.entries.lastObject') === entry
+    });
+  }),
+
   actions: {
     addEntry() {
-      let entries = this.get('transaction.entries');
-      entries.get('lastObject').set('last', undefined);
-      entries.createRecord({last: true});
+      this.get('transaction.entries').createRecord();
     },
 
     cancel() {

@@ -27,10 +27,10 @@
             <label class="control-label">Credit</label>
           </div>
       </div>
-      {{#each transaction.entries as |entry|}}
+      {{#each entries as |entry|}}
         <div class="row form-group">
             {{entry-input entry=entry rootAccount=(readonly rootAccount)}}
-            {{#if entry.last}}
+            {{#if entry.isLast}}
               <div class="col-md-1">
                 <button {{action "addEntry" on="click"}} type="button" class="btn btn-default" aria-label="Add entry">
                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
