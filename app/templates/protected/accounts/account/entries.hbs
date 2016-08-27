@@ -21,8 +21,8 @@
     </tr>
   </thead>
   <tbody>
-    {{#each model.entries as |entry|}}
-      <tr>
+    {{#each entries as |entry|}}
+      <tr {{action "selectEntry" entry on="click"}} class="{{if entry.isSelected "info" ""}}">
         <td>
           {{format-date entry.occurredOn}}
         </td>

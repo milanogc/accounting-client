@@ -1,6 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  entries: Ember.computed.map('model.entries', function(entry) {
+    return Ember.ObjectProxy.create({
+      content: entry,
+      isSelected: false
+    });
+  }),
+
   showTransactionModal: false,
   chartType: 'line',
 
@@ -60,6 +67,11 @@ export default Ember.Controller.extend({
           controller.send('refreshModel');
       });
       this.set('showTransactionModal', false);
+    },
+
+    selectEntry(entry) {
+      console.log(entry);
+      entry.toggleProperty('isSelected');
     }
   }
 });
